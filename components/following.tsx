@@ -54,7 +54,7 @@ export default function Following(props: { data: any; flipped: boolean }) {
         )}
       </View>
       <Text style={styles.white}>{name}</Text>
-      <Text style={[styles.white, { fontSize: 12 }]}>
+      <Text style={[styles.white, { fontSize: 10 }]}>
         {props.data.description}
       </Text>
     </>

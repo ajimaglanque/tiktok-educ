@@ -60,7 +60,7 @@ export const styles = StyleSheet.create({
   question: {
     backgroundColor: "transparent",
     color: "white",
-    fontSize: 18,
+    fontSize: 16,
     flexShrink: 1,
     justifyContent: "center",
   },
