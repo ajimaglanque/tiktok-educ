@@ -105,7 +105,9 @@ export default function TabOneScreen() {
             {activeTab === "Following" && (
               <Following data={data} flipped={flipped} />
             )}
-            {activeTab === "For You" && <ForYou data={data} />}
+            {activeTab === "For You" && (
+              <ForYou data={data} flipped={flipped} />
+            )}
           </View>
           <View style={styles.sideIcons}>
             <FontAwesome

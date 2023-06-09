@@ -1,8 +1,31 @@
+import { useMemo, useState } from "react";
 import { styles } from "../assets/styles";
 import { Text, View } from "./Themed";
+import { FontAwesome } from "@expo/vector-icons";
 
-export default function ForYou(props: { data: any }) {
+export default function ForYou(props: { data: any; flipped: boolean }) {
   const name = props.data.user.name;
+  const [answer, setAnswer] = useState<any>();
+
+  const getAnswer = async (id: number) => {
+    try {
+      let url = `https://cross-platform.rp.devfactory.com/reveal?id=${props.data.id}
+`;
+      const response = await fetch(url);
+      const json = await response.json();
+      setAnswer(json);
+      console.log(answer);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useMemo(() => {
+    console.log(props.flipped);
+    console.log(answer);
+    getAnswer(props.data.id);
+  }, [props.data.id, props.flipped]);
+
   return (
     <>
       <View
@@ -24,8 +47,24 @@ export default function ForYou(props: { data: any }) {
         <View style={{ backgroundColor: "transparent", marginBottom: 10 }}>
           {props.data.options?.map((x: any) => {
             return (
-              <View style={styles.choices} key={x.id}>
+              <View
+                style={
+                  props.flipped && answer?.correct_options[0].id === x.id
+                    ? [styles.correct]
+                    : [styles.choices]
+                }
+                key={x.id}
+              >
                 <Text style={styles.white}>{x.answer}</Text>
+                <FontAwesome
+                  name="check-circle"
+                  size={20}
+                  style={
+                    props.flipped && answer?.correct_options[0].id === x.id
+                      ? [styles.white, { alignSelf: "center" }]
+                      : { display: "none" }
+                  }
+                />
               </View>
             );
           })}
