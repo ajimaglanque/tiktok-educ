@@ -14,15 +14,12 @@ export default function ForYou(props: { data: any; flipped: boolean }) {
       const response = await fetch(url);
       const json = await response.json();
       setAnswer(json);
-      console.log(answer);
     } catch (error) {
       console.log(error);
     }
   };
 
   useMemo(() => {
-    console.log(props.flipped);
-    console.log(answer);
     getAnswer(props.data.id);
   }, [props.data.id, props.flipped]);
 
