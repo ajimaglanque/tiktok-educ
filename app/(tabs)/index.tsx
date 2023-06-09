@@ -45,7 +45,7 @@ export default function TabOneScreen() {
     }, MINUTE_MS);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [timer]);
 
   return (
     <View style={styles.container}>
@@ -95,10 +95,10 @@ export default function TabOneScreen() {
           <View
             style={styles.questionPort}
             onTouchStart={(e) => setSwipeStart(e.nativeEvent.pageY)}
-            onTouchEnd={(e) => {
+            onTouchEnd={async (e) => {
               if (swipeStart - e.nativeEvent.pageY > 20) {
-                getData(activeTab);
                 setFlipped(false);
+                await getData(activeTab);
               }
             }}
           >
